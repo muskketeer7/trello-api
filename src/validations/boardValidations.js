@@ -8,7 +8,7 @@ const createNew = async (req, res, next) => {
       'string.empty': 'Title is not allowed to be empty',
       'string.min': 'Title length must be at least 3 chars',
       'string.max': 'Title maximum must be at least 50 chars',
-      'string.trim': 'Title must not hvae leading or trailing whitespace'
+      'string.trim': 'Title must not hvae leading or trailing whitespace',
     }),
     description: Joi.string()
       .required()
@@ -22,18 +22,15 @@ const createNew = async (req, res, next) => {
         'string.min': 'Description length must be at least 3 chars',
         'string.max': 'Description maximum must be at least 50 chars',
         'string.trim':
-          'Description must not hvae leading or trailing whitespace'
-      })
+          'Description must not hvae leading or trailing whitespace',
+      }),
   })
 
   try {
-    console.log(req.body)
-
+    // chỉ định abortEarly: false để trường hợp có nhiều lỗi validation thì trả về tất cả các lỗi
     await correctCondition.validateAsync(req.body, { abortEarly: false })
-
-    res
-      .status(StatusCodes.CREATED)
-      .json({ message: 'GET: API get list boards' })
+    // Validate dữ liệu xong xuôi hợp lệ thì cho request đi tiếp sang controller
+    next()
   } catch (error) {
     console.log(error)
     res
@@ -43,5 +40,5 @@ const createNew = async (req, res, next) => {
 }
 
 export const boardValidation = {
-  createNew
+  createNew,
 }
