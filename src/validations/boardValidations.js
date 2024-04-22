@@ -1,5 +1,6 @@
 import { StatusCodes } from 'http-status-codes'
 import Joi from 'joi'
+import { BOARD_TYPES } from '~/utils/constants'
 
 const createNew = async (req, res, next) => {
   const correctCondition = Joi.object({
@@ -24,6 +25,9 @@ const createNew = async (req, res, next) => {
         'string.trim':
           'Description must not hvae leading or trailing whitespace',
       }),
+    type: Joi.string()
+      .valid(BOARD_TYPES.PUBLIC, BOARD_TYPES.PRIVATE)
+      .required(),
   })
 
   try {

@@ -2,7 +2,7 @@ import Joi from 'joi'
 import { OBJECT_ID_RULE, OBJECT_ID_RULE_MESSAGE } from '~/utils/validators'
 
 // Define Collection (name & schema)
-const CARD_COLLECTION_NAME = 'columns'
+const CARD_COLLECTION_NAME = 'cards'
 const CARD_COLLECTION_SCHEMA = Joi.object({
   boardId: Joi.string()
     .required()
